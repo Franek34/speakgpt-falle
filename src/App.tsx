@@ -2,7 +2,7 @@ import { Routes, Route, HashRouter } from "react-router-dom"
 import Speakgpt from "./pages/SpeakGPT/Speakgpt"
 import Falle from "./pages/Fall-E/Falle"
 import NotFound from "./pages/NotFound/Notfound"
-// import LoaderStart from "./components/Loader-starter/LoaderStart"
+import LoaderStart from "./components/Loader-starter/LoaderStart"
 
 export function App() {
   return (
@@ -17,7 +17,7 @@ export function App() {
 export function WrappedApp() {
   return (
     <HashRouter>
-      {/* <LoaderStart /> */}
+      <LoaderStart />
       <App />
     </HashRouter>
   )

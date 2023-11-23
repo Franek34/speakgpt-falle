@@ -86,9 +86,9 @@ const Falle: React.FC = () => {
 
   return (
     <div>
-      <div className="mx-4">
+      <div className="mx-4 pt-8">
         <div className="choose-area sm:mx-auto w-full sm:w-96 bg-[#202123] rounded-xl">
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between">
             <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 p-3 md:p-4  text-white  cursor-pointer hover:text-[#00df9a] transition">
               <Link className="flex items-center justify-center" to="/">
                 <AiFillThunderbolt /> SpeakGPT
