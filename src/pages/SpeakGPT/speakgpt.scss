@@ -1,0 +1,18 @@
+textarea {
+    &::placeholder {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    &-track {
+      background: #1d1e24;
+      border-radius: 4px;
+    }
+    &-thumb {
+      background: #40414f;
+      border-radius: 4px;
+    }
+  }

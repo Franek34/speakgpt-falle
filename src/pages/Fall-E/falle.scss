@@ -1,0 +1,36 @@
+.result{
+	margin-top: 1em;
+    width: 100%;
+    padding: 1em 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+	&__img{
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+		margin-bottom: 1em;
+		max-width: 80%;
+	
+		img{
+			max-width: 100%;
+			border-radius: 10px;
+			cursor: pointer;
+			border: 2px solid transparent;
+			transition: all 0.3s ease;
+
+			&:hover{
+				border-color: #675afe;
+			}
+		}
+	}
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 900px;
+}
+
+@import 'febreakpoints';
