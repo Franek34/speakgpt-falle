@@ -58,7 +58,7 @@ const Speakgpt = () => {
             &nbsp;SpeakGPT
           </h1>
 
-          <div className="flex items-center p-5 justify-between w-full my-4">
+          <div className="flex items-center justify-between w-full p-5 my-4">
             <button
               type="button"
               aria-label="button"
@@ -83,27 +83,27 @@ const Speakgpt = () => {
 
           <hr className="w-full" />
 
-          <div className="flex flex-col p-5 items-center justify-center w-full mx-auto text-gray-300 text-center">
-            <h2 className="mb-5 text-xl text-gray-400 font-bold">Historia</h2>
+          <div className="flex flex-col items-center justify-center w-full p-5 mx-auto text-center text-gray-300">
+            <h2 className="mb-5 text-xl font-bold text-gray-400">Historia</h2>
 
-            <a
-              href="/#"
-              className="w-full mx-auto border border-gray-500 rounded-lg my-2 p-2 text-sm xl: text-md"
+            <Link
+              to="/"
+              className="w-full p-2 mx-auto my-2 text-sm transition border border-gray-500 rounded-lg hover:bg-gray-700 xl: text-md"
             >
               Jak długo pamięta słoń?
-            </a>
-            <a
-              href="/#"
-              className="w-full mx-auto border border-gray-500 rounded-lg my-2 p-2"
+            </Link>
+            <Link
+              to="/"
+              className="w-full p-2 mx-auto my-2 transition border border-gray-500 rounded-lg hover:bg-gray-700"
             >
               Przepis na frytki
-            </a>
-            <a
-              href="/#"
-              className="w-full mx-auto border border-gray-500 rounded-lg my-2 p-2"
+            </Link>
+            <Link
+              to="/"
+              className="w-full p-2 mx-auto my-2 transition border border-gray-500 rounded-lg hover:bg-gray-700"
             >
               3 zasady savoir vivre
-            </a>
+            </Link>
           </div>
         </aside>
       </div>
@@ -125,13 +125,19 @@ const Speakgpt = () => {
       <div className="flex flex-col items-center mx-4 mt-12 md:mt-0 md:justify-between md:w-full">
         <div className="choose-area md:mx-auto w-full sm:w-96 bg-[#202123] rounded-xl mt-8">
           <div className="flex justify-between">
-            <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 p-3 md:p-4 text-white  cursor-pointer rounded-xl bg-[#40414f] hover:bg-[#30313b] transition">
-              <Link className="flex items-center justify-center" to="/">
+            <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 text-white  cursor-pointer rounded-xl bg-[#40414f] hover:bg-[#30313b] transition">
+              <Link
+                className="flex items-center justify-center py-4 px-10"
+                to="/"
+              >
                 <AiFillThunderbolt /> SpeakGPT
               </Link>
             </div>
-            <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1 p-2 md:p-3 text-white cursor-pointer hover:text-[#00df9a] transition">
-              <Link className="flex items-center justify-center" to="/falle">
+            <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1 text-white cursor-pointer hover:text-[#00df9a] transition">
+              <Link
+                className="flex items-center justify-center py-4 px-12"
+                to="/falle"
+              >
                 <AiOutlinePicture /> &nbsp;FALL-E
               </Link>
             </div>
@@ -207,7 +213,7 @@ const Speakgpt = () => {
             <button
               onClick={handleUserInput}
               aria-label="send button"
-              type="submit"
+              type="button"
               className="absolute p-1 text-gray-500 cursor-pointer right-5 bottom-4"
             >
               <IoSend size={24} />

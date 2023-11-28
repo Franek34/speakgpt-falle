@@ -9,6 +9,7 @@ const Falle: React.FC = () => {
   const [textInput, setTextInput] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
   const [images, setImages] = useState<string[]>([])
+  const [generating, setGenerating] = useState<boolean>(false)
 
   const disableGenerateButton = () => {
     setLoading(true)
@@ -30,14 +31,19 @@ const Falle: React.FC = () => {
   }
 
   const generateImages = async (input: string) => {
-    disableGenerateButton()
-    clearImage()
-    setTextInput("")
-
-    const apiKey = `${import.meta.env.VITE_DALLE_API_KEY}`
-    const maxImages = 4
+    if (generating) {
+      return
+    }
+    setGenerating(true)
 
     try {
+      disableGenerateButton()
+      clearImage()
+      setTextInput("")
+
+      const apiKey = `${import.meta.env.VITE_DALLE_API_KEY}`
+      const maxImages = 4
+
       for (let i = 0; i < maxImages; i += 1) {
         const randomNumber = Math.floor(Math.random() * 10000)
         const prompt = `${input} ${randomNumber}`
@@ -70,6 +76,7 @@ const Falle: React.FC = () => {
         // console.log(response)
       }
     } finally {
+      setGenerating(false)
       enableGenerateButton()
     }
   }
@@ -79,7 +86,7 @@ const Falle: React.FC = () => {
   }
 
   const enterKeyCheck = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !generating) {
       generateBtnClick()
     }
   }
@@ -89,13 +96,19 @@ const Falle: React.FC = () => {
       <div className="mx-4 pt-8">
         <div className="choose-area sm:mx-auto w-full sm:w-96 bg-[#202123] rounded-xl">
           <div className="flex justify-between">
-            <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 p-3 md:p-4  text-white  cursor-pointer hover:text-[#00df9a] transition">
-              <Link className="flex items-center justify-center" to="/">
+            <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 text-white  cursor-pointer hover:text-[#00df9a] transition">
+              <Link
+                className="flex items-center justify-center py-4 px-10"
+                to="/"
+              >
                 <AiFillThunderbolt /> SpeakGPT
               </Link>
             </div>
-            <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1 p-2 md:p-3 bg-[#40414f] text-white cursor-pointer rounded-xl  hover:bg-[#30313b] transition">
-              <Link className="flex items-center justify-center" to="/falle">
+            <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1  bg-[#40414f] text-white cursor-pointer rounded-xl  hover:bg-[#30313b] transition">
+              <Link
+                className="flex items-center justify-center py-4 sm:px-12 px-8"
+                to="/falle"
+              >
                 <AiOutlinePicture /> &nbsp;FALL-E
               </Link>
             </div>
@@ -135,7 +148,7 @@ const Falle: React.FC = () => {
             onClick={generateBtnClick}
             disabled={loading}
             aria-label="send button"
-            type="submit"
+            type="button"
             className="absolute p-1 text-gray-500 cursor-pointer right-5 bottom-3 sm:bottom-4"
           >
             <IoSend size={24} />
