@@ -25,9 +25,18 @@ const Speakgpt = () => {
   const [nav, setNav] = useState(true)
   const [userInput, setUserInput] = useState("")
   const [chatHistory, setChatHistory] = useState<any[]>([])
+  const [errorVisible, setErrorVisible] = useState(false)
 
   const handleUserInput = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
+
+    if (userInput.trim() === "") {
+      setErrorVisible(true)
+      return
+    }
+
+    setErrorVisible(false)
+
     setChatHistory((prevChat) => [
       ...prevChat,
       { role: "user", content: userInput },
@@ -127,7 +136,7 @@ const Speakgpt = () => {
           <div className="flex justify-between">
             <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 text-white  cursor-pointer rounded-xl bg-[#40414f] hover:bg-[#30313b] transition">
               <Link
-                className="flex items-center justify-center py-4 px-10"
+                className="flex items-center justify-center py-4 px-2 sm:px-10"
                 to="/"
               >
                 <AiFillThunderbolt /> SpeakGPT
@@ -135,7 +144,7 @@ const Speakgpt = () => {
             </div>
             <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1 text-white cursor-pointer hover:text-[#00df9a] transition">
               <Link
-                className="flex items-center justify-center py-4 px-12"
+                className="flex items-center justify-center py-4 px-2 sm:px-12"
                 to="/falle"
               >
                 <AiOutlinePicture /> &nbsp;FALL-E
@@ -202,6 +211,13 @@ const Speakgpt = () => {
 
         <div className="fixed flex flex-col w-full mx-2 mb-4 bottom-2 sm:w-3/4">
           <div className="relative w-11/12 mx-auto xl:w-3/5">
+            <p
+              className={`text-center mb-6 text-red-400 ${
+                errorVisible ? "block" : "hidden"
+              }`}
+            >
+              Pole nie może być puste!
+            </p>
             <form onSubmit={handleUserInput}>
               <input
                 value={userInput}

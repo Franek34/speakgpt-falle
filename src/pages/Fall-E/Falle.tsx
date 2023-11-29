@@ -10,6 +10,7 @@ const Falle: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [images, setImages] = useState<string[]>([])
   const [generating, setGenerating] = useState<boolean>(false)
+  const [isEmptyErrorVisible, setIsEmptyErrorVisible] = useState<boolean>(false)
 
   const disableGenerateButton = () => {
     setLoading(true)
@@ -82,8 +83,13 @@ const Falle: React.FC = () => {
   }
 
   const generateBtnClick = async () => {
-    await generateImages(textInput)
-  }
+    if (textInput.trim() !== "") {
+      setIsEmptyErrorVisible(false); 
+      await generateImages(textInput);
+    } else {
+      setIsEmptyErrorVisible(true); 
+    }
+  };
 
   const enterKeyCheck = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !generating) {
@@ -93,12 +99,12 @@ const Falle: React.FC = () => {
 
   return (
     <div>
-      <div className="mx-4 pt-8">
+      <div className="pt-8 mx-4">
         <div className="choose-area sm:mx-auto w-full sm:w-96 bg-[#202123] rounded-xl">
           <div className="flex justify-between">
             <div className="choose-area__gpt flex justify-center items-center w-1/2 m-1 text-white  cursor-pointer hover:text-[#00df9a] transition">
               <Link
-                className="flex items-center justify-center py-4 px-10"
+                className="flex items-center justify-center px-2 py-4 sm:px-10"
                 to="/"
               >
                 <AiFillThunderbolt /> SpeakGPT
@@ -106,7 +112,7 @@ const Falle: React.FC = () => {
             </div>
             <div className="choose-area__dalle flex justify-center items-center w-1/2 m-1  bg-[#40414f] text-white cursor-pointer rounded-xl  hover:bg-[#30313b] transition">
               <Link
-                className="flex items-center justify-center py-4 sm:px-12 px-8"
+                className="flex items-center justify-center px-2 py-4 sm:px-12"
                 to="/falle"
               >
                 <AiOutlinePicture /> &nbsp;FALL-E
@@ -154,6 +160,11 @@ const Falle: React.FC = () => {
             <IoSend size={24} />
           </button>
         </div>
+        {isEmptyErrorVisible && (
+          <p className="text-center mt-3 text-red-400">
+            Pole nie może być puste!
+          </p>
+        )}
       </div>
 
       <div className="result wrapper">
